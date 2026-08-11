@@ -1,0 +1,45 @@
+{
+  "admins": [
+    {
+      "id": 1,
+      "name": "Admin User",
+      "email": "admin@inventory.com",
+      "password": "admin123"
+    }
+  ],
+
+  "categories": [
+    {
+      "id": 1,
+      "name": "Electronics",
+      "description": "Electronic Products"
+    },
+    {
+      "id": 2,
+      "name": "Clothing",
+      "description": "Fashion Products"
+    }
+  ],
+
+  "products": [
+    {
+      "id": 101,
+      "sku": "ELE001",
+      "name": "Dell Laptop",
+      "description": "Dell Inspiron",
+      "price": 55000,
+      "categoryId": 1,
+      "status": "Active"
+    }
+  ],
+
+  "inventory": [
+    {
+      "id": 1,
+      "productId": 101,
+      "quantity": 25,
+      "reorderLevel": 10,
+      "lastUpdated": "2026-08-07"
+    }
+  ]
+}
