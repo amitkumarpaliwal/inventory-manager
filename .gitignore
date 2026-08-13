@@ -1,5 +1,13 @@
-
+# Dependencies
 node_modules/
 
+# Next.js build outputs
 .next/
 out/
+
+# Production / local env files
+.env*.local
+
+# IDE configurations
+.vscode/
+.idea/
