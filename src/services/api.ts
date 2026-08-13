@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API_BASE_URL } from '@/utils/contant';
+import { API_BASE_URL } from '../utils/contant';
 
 export const apiClient = axios.create({
   baseURL: API_BASE_URL,

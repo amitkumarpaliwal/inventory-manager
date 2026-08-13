@@ -30,6 +30,33 @@
       "price": 55000,
       "categoryId": 1,
       "status": "Active"
+    },
+  {
+      "id": 102,
+      "sku": "ELE002",
+      "name": "Dell Laptop",
+      "description": "Dell vostro",
+      "price": 50000,
+      "categoryId": 1,
+      "status": "Active"
+    },
+     {
+      "id": 103,
+      "sku": "ELE003",
+      "name": "Dell Laptop",
+      "description": "Dell Inspiron",
+      "price": 55000,
+      "categoryId": 1,
+      "status": "Active"
+    },
+  {
+      "id": 104,
+      "sku": "ELE004",
+      "name": "Dell Laptop",
+      "description": "Dell vostro",
+      "price": 50000,
+      "categoryId": 1,
+      "status": "Active"
     }
   ],
 
