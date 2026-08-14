@@ -1,9 +1,51 @@
-import { apiClient } from "./api"
+import { AxiosError } from "axios";
+import type { Product, ProductFormValues, ProductServiceError } from "../types/product";
+import { apiClient } from "./api";
 
-export const productService =  {
-    getallProducts: async () => {       
-          const response = await apiClient.get('/products');
-          return response.data;  
+const productServiceError = (error: unknown): ProductServiceError => {
+  if (error instanceof AxiosError) {
+    return {
+      message: error.response?.data?.message ?? error.message,
+      status: error.response?.status,
+    };
+  }
 
+  if (error instanceof Error) {
+    return {
+      message: error.message,
+    };
+  }
+
+  return {
+    message: "Unexpected error occurred.",
+  };
+};
+
+export const productService = {
+  getAllProducts: async (): Promise<Product[]> => {
+    try {
+      const response = await apiClient.get<Product[]>('/products');
+      return response.data;
+    } catch (error) {
+      throw productServiceError(error);
     }
-}
+  },
+
+  getProductById: async (id: string): Promise<Product> => {
+    try {
+      const response = await apiClient.get<Product>(`/products/${id}`);
+      return response.data;
+    } catch (error) {
+      throw productServiceError(error);
+    }
+  },
+
+  updateProduct: async (id: number, productData: Product): Promise<Product> => {
+    try {
+      const response = await apiClient.put<Product>(`/products/${id}`, productData);
+      return response.data;
+    } catch (error) {
+      throw productServiceError(error);
+    }
+  },
+};

@@ -1,38 +1,33 @@
 {
   "admins": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Admin User",
       "email": "admin@inventory.com",
       "password": "admin123"
     }
   ],
-
   "categories": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Electronics",
       "description": "Electronic Products"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Clothing",
       "description": "Fashion Products"
     }
   ],
-
   "products": [
     {
-      "id": 101,
-      "sku": "ELE001",
-      "name": "Dell Laptop",
-      "description": "Dell Inspiron",
+      "name": "lenovo Laptop",
+      "description": "lenovo thinkpad",
       "price": 55000,
-      "categoryId": 1,
-      "status": "Active"
+      "id": "101"
     },
-  {
-      "id": 102,
+    {
+      "id": "102",
       "sku": "ELE002",
       "name": "Dell Laptop",
       "description": "Dell vostro",
@@ -40,8 +35,8 @@
       "categoryId": 1,
       "status": "Active"
     },
-     {
-      "id": 103,
+    {
+      "id": "103",
       "sku": "ELE003",
       "name": "Dell Laptop",
       "description": "Dell Inspiron",
@@ -49,8 +44,8 @@
       "categoryId": 1,
       "status": "Active"
     },
-  {
-      "id": 104,
+    {
+      "id": "104",
       "sku": "ELE004",
       "name": "Dell Laptop",
       "description": "Dell vostro",
@@ -59,14 +54,14 @@
       "status": "Active"
     }
   ],
-
   "inventory": [
     {
-      "id": 1,
+      "id": "1",
       "productId": 101,
       "quantity": 25,
       "reorderLevel": 10,
       "lastUpdated": "2026-08-07"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

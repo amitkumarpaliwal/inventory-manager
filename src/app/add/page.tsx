@@ -1,7 +1,3 @@
-export default function Addpage () {
-    return (
-        <>
-        
-        </>
-    )
+export default function AddPage() {
+  return <></>;
 }
