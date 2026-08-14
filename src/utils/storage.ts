@@ -1,7 +1,7 @@
 import { AuthenticatedAdmin } from '@/types/auth';
-import { STORAGE_KEYS } from './constants';
+import { STORAGE_KEYS } from '@/utils/contant';
 
-export const getStoredAdminSession =
+export const getAdminSession =
 (): AuthenticatedAdmin | null => {
     if (typeof window === 'undefined') {
         return null;
