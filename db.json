@@ -1,29 +1,57 @@
 {
   "admins": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Admin User",
-      "email": "admin@inventory.com",
+      "email": "admin@retail.com",
       "password": "admin123"
+    },
+    {
+      "name": "admin2@retail.com",
+      "email": "admin2",
+      "password": "admin123",
+      "id": "rRc17od-uF8"
+    },
+    {
+      "name": "Admin",
+      "email": "admin2@retail.com",
+      "password": "admin123",
+      "id": "pBAj_Svfk7g"
+    },
+    {
+      "name": "Admin",
+      "email": "admin3@retail.com",
+      "password": "admin123",
+      "id": "N7FoQEL8CwY"
+    },
+    {
+      "name": "admin",
+      "email": "admin4@retail.com",
+      "password": "admin123",
+      "id": "HTQ6nQKGgkE"
+    },
+    {
+      "name": "admin",
+      "email": "admin5@retail.com",
+      "password": "admin123",
+      "id": "6UN34M1t-hM"
     }
   ],
-
   "categories": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Electronics",
       "description": "Electronic Products"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Clothing",
       "description": "Fashion Products"
     }
   ],
-
   "products": [
     {
-      "id": 101,
+      "id": "101",
       "sku": "ELE001",
       "name": "Dell Laptop",
       "description": "Dell Inspiron",
@@ -32,14 +60,14 @@
       "status": "Active"
     }
   ],
-
   "inventory": [
     {
-      "id": 1,
+      "id": "1",
       "productId": 101,
       "quantity": 25,
       "reorderLevel": 10,
       "lastUpdated": "2026-08-07"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
