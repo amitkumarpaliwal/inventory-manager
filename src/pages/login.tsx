@@ -1,13 +1,23 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useAuth } from '../context/AuthContext';
+import { getAdminSession } from '@/utils/storage';
 
 export default function Login() {
 	const [isRegister, setIsRegister] = useState(false); 
 	const [form, setForm] = useState({ name: '', email: '', password: '', confirm: '' }); 
 	const [error, setError] = useState(''); 
+	const [successMessage, setSuccessMessage] = useState('');
+	const [isRegistrationSuccessful, setIsRegistrationSuccessful] = useState(false);
 	const { login, register } = useAuth(); 
 	const router = useRouter(); 
+
+	useEffect(() => {
+		if (getAdminSession() && !isRegistrationSuccessful) {
+			router.replace('/dashboard');
+			return;
+		}
+	}, [router, isRegistrationSuccessful]);
 	
 	const submit = async (e: any) => { 
 		e.preventDefault(); 
@@ -16,8 +26,13 @@ export default function Login() {
 			if (isRegister) { 
 				if (form.password !== form.confirm) throw new Error('Passwords do not match'); 
 				await register({ name: form.name, email: form.email, password: form.password }); 
-				router.push('/login'); 
-				setIsRegister(false);
+				// router.push('/login'); 
+				setIsRegistrationSuccessful(true);
+				setSuccessMessage('Registration successful. Redirecting...');
+				setTimeout(() => {
+					setSuccessMessage('');
+					router.replace('/dashboard');
+				}, 3000);
 			} else { 
 				await login({ email: form.email, password: form.password }); 
 				router.push('/dashboard'); 
@@ -54,6 +69,7 @@ export default function Login() {
 					</button>
 
 					{error && <p className="text-red-600 text-sm">{error}</p>}
+					{successMessage && <p className="text-green-600 text-sm">{successMessage}</p>}
 				</form>
 			</div>
 		</div>
