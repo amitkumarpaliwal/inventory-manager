@@ -14,7 +14,9 @@ export function AuthProvider({ children }: any) {
 
     const login = async (credentials: any) => { 
 			const res = await apiClient.get('/admins', { 
-				params: { email: credentials.email } 
+				params: { 
+					email: credentials.email 
+				} 
 			}); 
 			const found = res.data?.[0]; 
 			if (!found || found.password !== credentials.password) 
@@ -25,7 +27,11 @@ export function AuthProvider({ children }: any) {
 		};
 
     const register = async (payload: any) => { 
-			const existing = await apiClient.get('/admins', { params: { email: payload.email } }); 
+			const existing = await apiClient.get('/admins', { 
+				params: { 
+					email: payload.email 
+				} 
+			}); 
 			if (existing.data?.length) throw new Error('Admin account already exists'); 
 			const created = await apiClient.post('/admins', payload); 
 			const session = { id: created.data.id, name: created.data.name, email: created.data.email }; 

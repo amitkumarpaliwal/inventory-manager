@@ -35,6 +35,36 @@
       "email": "admin5@retail.com",
       "password": "admin123",
       "id": "6UN34M1t-hM"
+    },
+    {
+      "name": "admin",
+      "email": "admin6@retail.com",
+      "password": "admin123",
+      "id": "21_dFwkOzUE"
+    },
+    {
+      "name": "admin",
+      "email": "admin7@retail.com",
+      "password": "admin123",
+      "id": "hGYcqqeMdqM"
+    },
+    {
+      "name": "admin",
+      "email": "admin8@retail.com",
+      "password": "admin123",
+      "id": "-mNGkMPd0RA"
+    },
+    {
+      "name": "admin",
+      "email": "admin9@retail.com",
+      "password": "admin123",
+      "id": "x7mBBuyM6Aw"
+    },
+    {
+      "name": "Admin",
+      "email": "admin10@retail.com",
+      "password": "admin123",
+      "id": "aw1k6hUfAH0"
     }
   ],
   "categories": [
