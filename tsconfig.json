@@ -1,5 +1,11 @@
 {
   "compilerOptions": {
+    "jsx": "preserve",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    },
     "target": "ES2017",
     "lib": [
       "dom",
@@ -13,15 +19,15 @@
     "incremental": true,
     "module": "esnext",
     "esModuleInterop": true,
-    "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
     "plugins": [
       {
         "name": "next"
       }
-    ]
+    ],
+    "strictNullChecks": true,
+    "moduleResolution": "node"
   },
   "include": [
     "next-env.d.ts",
@@ -31,9 +37,5 @@
   ],
   "exclude": [
     "node_modules"
-  ],
-    "paths": {
-      "@/*": ["./src/*"]
-    }
-  }
-
+  ]
+}

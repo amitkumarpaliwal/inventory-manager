@@ -3,8 +3,68 @@
     {
       "id": "1",
       "name": "Admin User",
-      "email": "admin@inventory.com",
+      "email": "admin@retail.com",
       "password": "admin123"
+    },
+    {
+      "name": "admin2@retail.com",
+      "email": "admin2",
+      "password": "admin123",
+      "id": "rRc17od-uF8"
+    },
+    {
+      "name": "Admin",
+      "email": "admin2@retail.com",
+      "password": "admin123",
+      "id": "pBAj_Svfk7g"
+    },
+    {
+      "name": "Admin",
+      "email": "admin3@retail.com",
+      "password": "admin123",
+      "id": "N7FoQEL8CwY"
+    },
+    {
+      "name": "admin",
+      "email": "admin4@retail.com",
+      "password": "admin123",
+      "id": "HTQ6nQKGgkE"
+    },
+    {
+      "name": "admin",
+      "email": "admin5@retail.com",
+      "password": "admin123",
+      "id": "6UN34M1t-hM"
+    },
+    {
+      "name": "admin",
+      "email": "admin6@retail.com",
+      "password": "admin123",
+      "id": "21_dFwkOzUE"
+    },
+    {
+      "name": "admin",
+      "email": "admin7@retail.com",
+      "password": "admin123",
+      "id": "hGYcqqeMdqM"
+    },
+    {
+      "name": "admin",
+      "email": "admin8@retail.com",
+      "password": "admin123",
+      "id": "-mNGkMPd0RA"
+    },
+    {
+      "name": "admin",
+      "email": "admin9@retail.com",
+      "password": "admin123",
+      "id": "x7mBBuyM6Aw"
+    },
+    {
+      "name": "Admin",
+      "email": "admin10@retail.com",
+      "password": "admin123",
+      "id": "aw1k6hUfAH0"
     }
   ],
   "categories": [
@@ -31,7 +91,7 @@
     },
     {
       "id": "103",
-      "sku": "ELE001",
+      "sku": "ELE003",
       "name": "Lenovo laptop",
       "description": "Lenovo thinkpad",
       "price": 60000,
