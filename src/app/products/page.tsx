@@ -10,19 +10,22 @@ export default function ProductsPage() {
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
-    const loadProducts = async (): Promise<void> => {
+  const loadProducts = async (): Promise<void> => {
         const productsData = await productService.getAllProducts();
         setProducts(productsData);      
     };
-
     void loadProducts();
   }, []);
+
+  const handleProductDeleted = (id: number): void => {
+    setProducts((current) => current.filter((product) => product.id !== id));
+  };
 
   return (
     <div className={styles.layout}>
       <div className={styles.productgrid}>
         {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard key={product.id} product={product} onDeleted ={handleProductDeleted} />
         ))}
       </div>
     </div>

@@ -9,7 +9,6 @@
 }
 
 .card:hover {
-  transform: translateY(-4px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
@@ -59,15 +58,31 @@
 }
 
 .actions {
+  display: flex;
+  flex-direction: grid;
+  justify-content: flex-start;
   padding: 14px 18px 18px;
+  gap: 10px;
 }
 
 .editButton {
-  width: 100%;
+  width: 50%;
   padding: 10px 16px;
   border: none;
   border-radius: 8px;
   background-color: #2563eb;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.deleteButton {
+  width: 50%;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: #eb3221;
   color: white;
   font-size: 14px;
   font-weight: 600;

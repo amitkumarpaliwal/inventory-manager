@@ -63,12 +63,7 @@ export default function EditProductForm({ product }: {product : Product}) {
     }
 
     try {
-      const updatedProduct: Product = {
-        ...product,
-        ...formValues,
-      };
-
-      await productService.updateProduct(product.id, updatedProduct);
+      await productService.updateProduct(product.id, formValues);
       router.push('/products');
     } catch (error) {
       const message = error instanceof Error ? error.message : 'Unable to update product.';

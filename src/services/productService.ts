@@ -1,6 +1,8 @@
 import { AxiosError } from "axios";
 import type { Product, ProductFormValues, ProductServiceError } from "../types/product";
 import { apiClient } from "./api";
+import { toast } from "react-toastify";
+
 
 const productServiceError = (error: unknown): ProductServiceError => {
   if (error instanceof AxiosError) {
@@ -40,12 +42,23 @@ export const productService = {
     }
   },
 
-  updateProduct: async (id: number, productData: Product): Promise<Product> => {
+  updateProduct: async (id: number, productData: ProductFormValues): Promise<Product> => {
     try {
-      const response = await apiClient.put<Product>(`/products/${id}`, productData);
+      const response = await apiClient.patch<Product>(`/products/${id}`, productData);
       return response.data;
     } catch (error) {
       throw productServiceError(error);
     }
   },
+
+  deleteProduct : async (id:number) => {
+    try{
+     await apiClient.delete(`/products/${id}`);
+      toast.warning("product deleted")
+    }
+    catch(error)
+    {
+      throw productServiceError(error);
+    }
+  }
 };
