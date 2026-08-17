@@ -6,18 +6,38 @@ export interface Product {
   price: number;
   categoryId: number;
   status: string;
+  image?: string;
 }
 
 export interface ProductFormValues {
   name: string;
   description: string;
   price: number;
+  status: string;
 }
 
 export interface ProductFormErrors {
   name?: string;
   description?: string;
   price?: string;
+}
+
+export interface NewProductFormValues {
+  sku: string;
+  name: string;
+  description: string;
+  price: number;
+  image: string;
+  category: string;
+  status: string;
+}
+
+export interface NewProductFormErrors {
+  sku?: string;
+  name?: string;
+  description?: string;
+  price?: string;
+  category?: string;
 }
 
 export interface ProductServiceError {

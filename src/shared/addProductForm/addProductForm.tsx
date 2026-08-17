@@ -1,30 +1,35 @@
 'use client';
 
-import { useState, type ChangeEvent, type FormEvent } from 'react';
-import { productService } from '../../services/productService';
-import type { Product, ProductFormErrors, ProductFormValues } from '../../types/product';
-import { PRODUCT_STATUS_OPTIONS } from '../../utils/contant';
-import styles from './editProductForm.module.css'
+import { useState, type FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
+import { productService } from '../../services/productService';
+import type { NewProductFormErrors, NewProductFormValues } from '../../types/product';
+import { CATEGORY_ID_MAP, normalizeCategory, PRODUCT_STATUS_OPTIONS } from '../../utils/contant';
+import styles from './addProductForm.module.css';
 
-const initialErrors: ProductFormErrors = {
+const initialFormValues: NewProductFormValues = {
+  sku: '',
   name: '',
   description: '',
-  price: '',
+  price: 0,
+  image: '',
+  category: '',
+  status: 'Active',
 };
 
-export default function EditProductForm({ product }: {product : Product}) {
-  const [formValues, setFormValues] = useState<ProductFormValues>({
-    name: product.name,
-    description: product.description,
-    price: product.price,
-    status: product.status,
-  });
-  const [errors, setErrors] = useState<ProductFormErrors>(initialErrors);
+const initialErrors: NewProductFormErrors = {};
+
+export default function AddProductForm() {
+  const [formValues, setFormValues] = useState<NewProductFormValues>(initialFormValues);
+  const [errors, setErrors] = useState<NewProductFormErrors>(initialErrors);
   const [submitError, setSubmitError] = useState<string>('');
 
   const validateForm = (): boolean => {
-    const nextErrors: ProductFormErrors = {};
+    const nextErrors: NewProductFormErrors = {};
+
+    if (!formValues.sku.trim()) {
+      nextErrors.sku = 'SKU is required.';
+    }
 
     if (!formValues.name.trim()) {
       nextErrors.name = 'Product name is required.';
@@ -42,12 +47,18 @@ export default function EditProductForm({ product }: {product : Product}) {
       nextErrors.price = 'Price must be greater than 0.';
     }
 
+    if (!formValues.category.trim()) {
+      nextErrors.category = 'Category is required.';
+    } else if (!CATEGORY_ID_MAP[normalizeCategory(formValues.category)]) {
+      nextErrors.category = 'Category must be Electronics or Clothing.';
+    }
+
     setErrors(nextErrors);
     return Object.keys(nextErrors).length === 0;
   };
 
   const handleFieldChange =
-    (field: keyof ProductFormValues) =>
+    (field: keyof NewProductFormValues) =>
     (event) => {
       const value = field === 'price' ? Number(event.target.value) : event.target.value;
       setFormValues((current) => ({ ...current, [field]: value }));
@@ -65,23 +76,40 @@ export default function EditProductForm({ product }: {product : Product}) {
     }
 
     try {
-      await productService.updateProduct(product.id, formValues);
+      const categoryId = CATEGORY_ID_MAP[normalizeCategory(formValues.category)];
+      await productService.createProduct(formValues, categoryId);
       router.push('/products');
     } catch (error) {
-      const message = error instanceof Error ? error.message : 'Unable to update product.';
+      const message = error instanceof Error ? error.message : 'Unable to add product.';
       setSubmitError(message);
     }
   };
 
-
-   return (
-    <div className={styles.editFormContainer}>
+  return (
+    <div className={styles.addFormContainer}>
       <form
-        className={styles.editProductForm}
+        className={styles.addProductForm}
         onSubmit={handleForm}
         noValidate
       >
-        <h2 className={styles.title}>Edit Product</h2>
+        <h2 className={styles.title}>Add Electronics Product</h2>
+
+        <div className={styles.formGroup}>
+          <label htmlFor="sku">SKU</label>
+
+          <input
+            id="sku"
+            type="text"
+            value={formValues.sku}
+            onChange={handleFieldChange('sku')}
+          />
+
+          {errors.sku && (
+            <span className={styles.errorMessage}>
+              {errors.sku}
+            </span>
+          )}
+        </div>
 
         <div className={styles.formGroup}>
           <label htmlFor="name">Product Name</label>
@@ -106,7 +134,7 @@ export default function EditProductForm({ product }: {product : Product}) {
           <input
             id="price"
             type="number"
-            value={formValues.price === 0 ? "": formValues.price}
+            value={formValues.price  === 0 ? "" : formValues.price}
             onChange={handleFieldChange('price')}
             min="0"
           />
@@ -135,6 +163,36 @@ export default function EditProductForm({ product }: {product : Product}) {
         </div>
 
         <div className={styles.formGroup}>
+          <label htmlFor="image">Image Path</label>
+
+          <input
+            id="image"
+            type="text"
+            value={formValues.image}
+            onChange={handleFieldChange('image')}
+            placeholder="/images/laptop.jpg"
+          />
+        </div>
+
+        <div className={styles.formGroup}>
+          <label htmlFor="category">Category</label>
+
+          <input
+            id="category"
+            type="text"
+            value={formValues.category}
+            onChange={handleFieldChange('category')}
+            placeholder="Electronics"
+          />
+
+          {errors.category && (
+            <span className={styles.errorMessage}>
+              {errors.category}
+            </span>
+          )}
+        </div>
+
+        <div className={styles.formGroup}>
           <label htmlFor="status">Status</label>
 
           <select
@@ -158,12 +216,11 @@ export default function EditProductForm({ product }: {product : Product}) {
 
         <button
           type="submit"
-          className={styles.updateButton}
+          className={styles.addButton}
         >
-          Update Product
+          Add Product
         </button>
       </form>
     </div>
   );
-
 }

@@ -1,5 +1,5 @@
 import { AxiosError } from "axios";
-import type { Product, ProductFormValues, ProductServiceError } from "../types/product";
+import type { NewProductFormValues, Product, ProductFormValues, ProductServiceError } from "../types/product";
 import { apiClient } from "./api";
 import { toast } from "react-toastify";
 
@@ -36,6 +36,20 @@ export const productService = {
   getProductById: async (id: string): Promise<Product> => {
     try {
       const response = await apiClient.get<Product>(`/products/${id}`);
+      return response.data;
+    } catch (error) {
+      throw productServiceError(error);
+    }
+  },
+
+  createProduct: async (productData: NewProductFormValues, categoryId: number): Promise<Product> => {
+    try {
+      const { category, ...productFields } = productData;
+      const payload = {
+        ...productFields,
+        categoryId,
+      };
+      const response = await apiClient.post<Product>('/products', payload);
       return response.data;
     } catch (error) {
       throw productServiceError(error);

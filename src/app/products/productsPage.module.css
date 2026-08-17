@@ -8,3 +8,26 @@
     margin-left: 100px;
     width: 90%;
 }
+
+.addButton {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 100;
+}
+
+.addButton button {
+    padding: 14px 22px;
+    border: none;
+    border-radius: 8px;
+    background-color: #26aceb;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.addButton button:hover {
+    background-color: #1d4ed8;
+}

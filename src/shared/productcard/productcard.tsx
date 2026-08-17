@@ -6,6 +6,7 @@ import styles from './productcard.module.css';
 import ConfirmModal from '../confirmModal/confirmModal';
 import { useState } from 'react';
 import { productService } from '../../services/productService';
+import { PRODUCT_STATUS_STYLES } from '../../utils/contant';
 
 export default function ProductCard({ product, onDeleted }: {product : Product, onDeleted: (id: number) => void}) {
   const router = useRouter();
@@ -40,8 +41,12 @@ const [productIdToDelete, setProductIdToDelete] = useState<number | null>(null);
     <div className={styles.card}>
       <div className={styles.header}>
         <span className={styles.category}>Electronics</span>
-        <span className={styles.status}>{product.status}</span>
+        <span className={styles.status} style={PRODUCT_STATUS_STYLES[product.status]}>{product.status}</span>
       </div>
+
+      {product.image && (
+        <img className={styles.image} src={product.image} alt={product.name} />
+      )}
 
       <div className={styles.content}>
         <h2 className={styles.name}>{product.name}</h2>
