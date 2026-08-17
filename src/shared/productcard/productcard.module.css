@@ -1,0 +1,96 @@
+.card {
+  width: 320px;
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 18px;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.category {
+  font-size: 13px;
+  font-weight: 600;
+  color: #555;
+}
+
+.status {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 20px;
+}
+
+.image {
+  width: 100%;
+  height: 160px;
+  object-fit: contain;
+  background-color: #f8fafc;
+  padding: 10px;
+}
+
+.content {
+  padding: 18px;
+}
+
+.name {
+  margin: 0 0 6px;
+  font-size: 21px;
+  color: #222;
+}
+
+.description {
+  margin: 0 0 20px;
+  color: #666;
+  font-size: 14px;
+}
+
+.price {
+  font-size: 24px;
+  font-weight: 700;
+  color: #111;
+}
+
+.actions {
+  display: flex;
+  flex-direction: grid;
+  justify-content: flex-start;
+  padding: 14px 18px 18px;
+  gap: 10px;
+}
+
+.editButton {
+  width: 50%;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: #2563eb;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.deleteButton {
+  width: 50%;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: #eb3221;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}

@@ -81,13 +81,44 @@
   ],
   "products": [
     {
-      "id": "101",
+      "id": "102",
       "sku": "ELE001",
-      "name": "Dell Laptop",
-      "description": "Dell Inspiron",
-      "price": 55000,
+      "name": "Dell laptop",
+      "description": "Dell Vostro",
+      "price": 60000,
       "categoryId": 1,
-      "status": "Active"
+      "status": "Active",
+      "image": "/images/laptop.jpg"
+    },
+    {
+      "id": "103",
+      "sku": "ELE003",
+      "name": "Lenovo laptop",
+      "description": "Lenovo thinkpad",
+      "price": 60000,
+      "categoryId": 1,
+      "status": "Active",
+      "image": "/images/laptop.jpg"
+    },
+    {
+      "id": "HKt6r-wkCic",
+      "sku": "ELE-004",
+      "name": "Asus Laptop",
+      "description": "Asus Gaming laptop",
+      "price": 95000,
+      "image": "/images/laptop.jpg",
+      "status": "Active",
+      "categoryId": 1
+    },
+    {
+      "sku": "ELE-005",
+      "name": "ACER Laptop",
+      "description": "Acer Gaming laptop",
+      "price": 60000,
+      "image": "/images/laptop.jpg",
+      "status": "Active",
+      "categoryId": 1,
+      "id": "9AR_dF7Nysg"
     }
   ],
   "inventory": [

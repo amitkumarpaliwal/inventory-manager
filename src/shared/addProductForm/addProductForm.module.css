@@ -1,0 +1,94 @@
+.addFormContainer {
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.addProductForm {
+  width: 100%;
+  max-width: 600px;
+  padding: 30px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
+}
+
+.title {
+  margin: 0 0 25px;
+  font-size: 24px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.formGroup label {
+  margin-bottom: 7px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.formGroup input,
+.formGroup textarea {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 15px;
+  font-family: inherit;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.formGroup input {
+  height: 42px;
+}
+
+.formGroup textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus {
+  border-color: #2563eb;
+}
+
+.errorMessage {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #dc2626;
+}
+
+.submitError {
+  margin: 0 0 15px;
+  padding: 10px 12px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #dc2626;
+}
+
+.addButton {
+  width: 100%;
+  height: 42px;
+  border: none;
+  border-radius: 6px;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.addButton:hover {
+  background: #1d4ed8;
+}
