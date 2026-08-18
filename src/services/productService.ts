@@ -56,9 +56,14 @@ export const productService = {
     }
   },
 
-  updateProduct: async (id: number, productData: ProductFormValues): Promise<Product> => {
+  updateProduct: async (id: number, productData: ProductFormValues, categoryId: number): Promise<Product> => {
     try {
-      const response = await apiClient.patch<Product>(`/products/${id}`, productData);
+      const { category, ...productFields } = productData;
+      const payload = {
+        ...productFields,
+        categoryId,
+      };
+      const response = await apiClient.patch<Product>(`/products/${id}`, payload);
       return response.data;
     } catch (error) {
       throw productServiceError(error);

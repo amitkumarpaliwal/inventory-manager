@@ -4,14 +4,26 @@ import { useRouter } from 'next/navigation';
 import type { Product } from '../../types/product';
 import styles from './productcard.module.css';
 import ConfirmModal from '../confirmModal/confirmModal';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { productService } from '../../services/productService';
+import { categoryService } from '../../services/categoryService';
 import { PRODUCT_STATUS_STYLES } from '../../utils/contant';
 
 export default function ProductCard({ product, onDeleted }: {product : Product, onDeleted: (id: number) => void}) {
   const router = useRouter();
   const [showModal, setShowModal] = useState(false);
 const [productIdToDelete, setProductIdToDelete] = useState<number | null>(null);
+  const [categoryName, setCategoryName] = useState<string>('');
+
+  useEffect(() => {
+    const loadCategory = async () => {
+      const categories = await categoryService.getAllCategories();
+      const matchedCategory = categories.find((c) => Number(c.id) === product.categoryId);
+      setCategoryName(matchedCategory ? matchedCategory.name : '');
+    };
+    loadCategory();
+  }, [product.categoryId]);
+
   const handleEdit = (): void => {
     router.push(`/edit/${product.id}`);
   };
@@ -40,7 +52,7 @@ const [productIdToDelete, setProductIdToDelete] = useState<number | null>(null);
   return (
     <div className={styles.card}>
       <div className={styles.header}>
-        <span className={styles.category}>Electronics</span>
+        <span className={styles.category}>{categoryName}</span>
         <span className={styles.status} style={PRODUCT_STATUS_STYLES[product.status]}>{product.status}</span>
       </div>
 
