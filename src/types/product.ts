@@ -7,6 +7,8 @@ export interface Product {
   categoryId: number;
   status: string;
   image?: string;
+  quantity: number;
+  minStock: number;
 }
 
 export interface ProductFormValues {
@@ -14,12 +16,17 @@ export interface ProductFormValues {
   description: string;
   price: number;
   status: string;
+  category:string;
+  quantity: number;
+  minStock: number;
 }
 
 export interface ProductFormErrors {
   name?: string;
   description?: string;
   price?: string;
+  quantity?: string;
+  minStock?: string;
 }
 
 export interface NewProductFormValues {
@@ -30,6 +37,8 @@ export interface NewProductFormValues {
   image: string;
   category: string;
   status: string;
+  quantity: number;
+  minStock: number;
 }
 
 export interface NewProductFormErrors {
@@ -38,6 +47,8 @@ export interface NewProductFormErrors {
   description?: string;
   price?: string;
   category?: string;
+  quantity?: string;
+  minStock?: string;
 }
 
 export interface ProductServiceError {

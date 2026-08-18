@@ -1,11 +1,12 @@
 'use client';
 
-import { useState, type FormEvent } from 'react';
+import { useEffect, useState, type FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import { productService } from '../../services/productService';
 import type { NewProductFormErrors, NewProductFormValues } from '../../types/product';
 import { CATEGORY_ID_MAP, normalizeCategory, PRODUCT_STATUS_OPTIONS } from '../../utils/contant';
 import styles from './addProductForm.module.css';
+import { categoryService } from '../../services/categoryService'
 
 const initialFormValues: NewProductFormValues = {
   sku: '',
@@ -15,6 +16,8 @@ const initialFormValues: NewProductFormValues = {
   image: '',
   category: '',
   status: 'Active',
+  quantity: 0,
+  minStock: 0,
 };
 
 const initialErrors: NewProductFormErrors = {};
@@ -23,6 +26,7 @@ export default function AddProductForm() {
   const [formValues, setFormValues] = useState<NewProductFormValues>(initialFormValues);
   const [errors, setErrors] = useState<NewProductFormErrors>(initialErrors);
   const [submitError, setSubmitError] = useState<string>('');
+  const [categories, setCategories] = useState<string[]>([]);
 
   const validateForm = (): boolean => {
     const nextErrors: NewProductFormErrors = {};
@@ -53,6 +57,14 @@ export default function AddProductForm() {
       nextErrors.category = 'Category must be Electronics or Clothing.';
     }
 
+    if (Number(formValues.quantity) < 0) {
+      nextErrors.quantity = 'Quantity cannot be negative.';
+    }
+
+    if (Number(formValues.minStock) < 0) {
+      nextErrors.minStock = 'Minimum stock cannot be negative.';
+    }
+
     setErrors(nextErrors);
     return Object.keys(nextErrors).length === 0;
   };
@@ -60,7 +72,7 @@ export default function AddProductForm() {
   const handleFieldChange =
     (field: keyof NewProductFormValues) =>
     (event) => {
-      const value = field === 'price' ? Number(event.target.value) : event.target.value;
+      const value = field === 'price' || field === 'quantity' || field === 'minStock' ? Number(event.target.value) : event.target.value;
       setFormValues((current) => ({ ...current, [field]: value }));
       setErrors((current) => ({ ...current, [field]: undefined }));
       setSubmitError('');
@@ -84,6 +96,14 @@ export default function AddProductForm() {
       setSubmitError(message);
     }
   };
+
+useEffect(()=> {
+  const loadCategories = async ()=> {
+  const categories =  await categoryService.getAllCategories();
+  setCategories(categories.map( c => c.name));
+  }
+  loadCategories();
+},[]);
 
   return (
     <div className={styles.addFormContainer}>
@@ -147,6 +167,42 @@ export default function AddProductForm() {
         </div>
 
         <div className={styles.formGroup}>
+          <label htmlFor="quantity">Quantity</label>
+
+          <input
+            id="quantity"
+            type="number"
+            value={formValues.quantity === 0 ? "" : formValues.quantity}
+            onChange={handleFieldChange('quantity')}
+            min="0"
+          />
+
+          {errors.quantity && (
+            <span className={styles.errorMessage}>
+              {errors.quantity}
+            </span>
+          )}
+        </div>
+
+        <div className={styles.formGroup}>
+          <label htmlFor="minStock">Minimum Stock</label>
+
+          <input
+            id="minStock"
+            type="number"
+            value={formValues.minStock === 0 ? "" : formValues.minStock}
+            onChange={handleFieldChange('minStock')}
+            min="0"
+          />
+
+          {errors.minStock && (
+            <span className={styles.errorMessage}>
+              {errors.minStock}
+            </span>
+          )}
+        </div>
+
+        <div className={styles.formGroup}>
           <label htmlFor="description">Description</label>
 
           <textarea
@@ -176,20 +232,18 @@ export default function AddProductForm() {
 
         <div className={styles.formGroup}>
           <label htmlFor="category">Category</label>
-
-          <input
-            id="category"
-            type="text"
-            value={formValues.category}
-            onChange={handleFieldChange('category')}
-            placeholder="Electronics"
-          />
-
-          {errors.category && (
-            <span className={styles.errorMessage}>
-              {errors.category}
-            </span>
-          )}
+          <select
+          id ="category"
+          value={formValues.category}
+          onChange={handleFieldChange('category')}>
+          {
+            categories.map((c)=> 
+            <option key = {c} value={c}>
+              {c}
+            </option>
+            )
+          }            
+          </select>
         </div>
 
         <div className={styles.formGroup}>

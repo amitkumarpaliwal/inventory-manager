@@ -17,4 +17,8 @@ export const CATEGORY_ID_MAP: Record<string, number> = {
   clothing: 2,
 };
 
+export const Category_value_Map :Record<number,string> ={
+  1: "electronics",
+  2: "clothing"
+}
 export const normalizeCategory = (value: string): string => value.trim().toLowerCase();
