@@ -4,7 +4,7 @@ import { useEffect, useState, type FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import { productService } from '../../services/productService';
 import type { NewProductFormErrors, NewProductFormValues } from '../../types/product';
-import { CATEGORY_ID_MAP, normalizeCategory, PRODUCT_STATUS_OPTIONS } from '../../utils/contant';
+import { CATEGORY_ID_MAP, PRODUCT_STATUS_OPTIONS } from '../../utils/contant';
 import styles from './addProductForm.module.css';
 import { categoryService } from '../../services/categoryService'
 
@@ -51,12 +51,6 @@ export default function AddProductForm() {
       nextErrors.price = 'Price must be greater than 0.';
     }
 
-    if (!formValues.category.trim()) {
-      nextErrors.category = 'Category is required.';
-    } else if (!CATEGORY_ID_MAP[normalizeCategory(formValues.category)]) {
-      nextErrors.category = 'Category must be Electronics or Clothing.';
-    }
-
     if (Number(formValues.quantity) < 0) {
       nextErrors.quantity = 'Quantity cannot be negative.';
     }
@@ -86,10 +80,9 @@ export default function AddProductForm() {
     if (!validateForm()) {
       return;
     }
-
     try {
-      const categoryId = CATEGORY_ID_MAP[normalizeCategory(formValues.category)];
-      await productService.createProduct(formValues, categoryId);
+      const categoryId = CATEGORY_ID_MAP[formValues.category];
+            await productService.createProduct(formValues, categoryId);
       router.push('/products');
     } catch (error) {
       const message = error instanceof Error ? error.message : 'Unable to add product.';
@@ -112,7 +105,7 @@ useEffect(()=> {
         onSubmit={handleForm}
         noValidate
       >
-        <h2 className={styles.title}>Add Electronics Product</h2>
+        <h2 className={styles.title}>Add New Product</h2>
 
         <div className={styles.formGroup}>
           <label htmlFor="sku">SKU</label>
