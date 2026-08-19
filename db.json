@@ -136,7 +136,8 @@
       "image": "/images/laptop.jpg",
       "status": "Discontinued",
       "quantity": 10,
-      "minStock": 0,
+      "minStock": 1,
+      "categoryId": 1,
       "id": "8oqZQ8xGCEI"
     }
   ],

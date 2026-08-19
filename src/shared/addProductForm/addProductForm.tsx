@@ -7,6 +7,7 @@ import type { NewProductFormErrors, NewProductFormValues } from '../../types/pro
 import { CATEGORY_ID_MAP, PRODUCT_STATUS_OPTIONS } from '../../utils/contant';
 import styles from './addProductForm.module.css';
 import { categoryService } from '../../services/categoryService'
+import { category } from '@/types/category';
 
 const initialFormValues: NewProductFormValues = {
   sku: '',
@@ -14,7 +15,7 @@ const initialFormValues: NewProductFormValues = {
   description: '',
   price: 0,
   image: '',
-  category: '',
+  category: 'Clothing',
   status: 'Active',
   quantity: 0,
   minStock: 0,
@@ -26,7 +27,7 @@ export default function AddProductForm() {
   const [formValues, setFormValues] = useState<NewProductFormValues>(initialFormValues);
   const [errors, setErrors] = useState<NewProductFormErrors>(initialErrors);
   const [submitError, setSubmitError] = useState<string>('');
-  const [categories, setCategories] = useState<string[]>([]);
+  const [categories, setCategories] = useState<category[]>([]);
 
   const validateForm = (): boolean => {
     const nextErrors: NewProductFormErrors = {};
@@ -71,7 +72,7 @@ export default function AddProductForm() {
       setErrors((current) => ({ ...current, [field]: undefined }));
       setSubmitError('');
     };
-
+ 
   const router = useRouter();
 
   const handleForm = async (event: FormEvent<HTMLFormElement>) => {
@@ -93,7 +94,7 @@ export default function AddProductForm() {
 useEffect(()=> {
   const loadCategories = async ()=> {
   const categories =  await categoryService.getAllCategories();
-  setCategories(categories.map( c => c.name));
+  setCategories(categories);
   }
   loadCategories();
 },[]);
@@ -231,8 +232,8 @@ useEffect(()=> {
           onChange={handleFieldChange('category')}>
           {
             categories.map((c)=> 
-            <option key = {c} value={c}>
-              {c}
+            <option key = {c.id} value={c.name}>
+              {c.name}
             </option>
             )
           }            

@@ -13,12 +13,12 @@ export const PRODUCT_STATUS_STYLES: Record<string, { background: string; color: 
 };
 
 export const CATEGORY_ID_MAP: Record<string, number> = {
-  electronics: 1,
-  clothing: 2,
+  Electronics: 1,
+  Clothing: 2,
 };
 
 export const Category_value_Map :Record<number,string> ={
-  1: "electronics",
-  2: "clothing"
+  1: "Electronics",
+  2: "Clothing"
 }
 export const normalizeCategory = (value: string): string => value.trim().toLowerCase();
