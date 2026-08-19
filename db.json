@@ -45,7 +45,7 @@
       "categoryId": 1,
       "status": "Active",
       "image": "/images/laptop.jpg",
-      "quantity": 2,
+      "quantity": 3,
       "minStock": 20
     },
     {
@@ -71,6 +71,18 @@
       "id": "9AR_dF7Nysg",
       "quantity": 4,
       "minStock": 40
+    },
+    {
+      "sku": "ELE- 0101",
+      "name": "Thoshiba",
+      "description": "Thoshiba laptop",
+      "price": 60000,
+      "image": "/images/laptop.jpg",
+      "status": "Discontinued",
+      "quantity": 10,
+      "minStock": 1,
+      "categoryId": 1,
+      "id": "8oqZQ8xGCEI"
     }
   ],
   "inventory": [

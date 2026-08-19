@@ -7,22 +7,21 @@ import ConfirmModal from '../confirmModal/confirmModal';
 import { useEffect, useState } from 'react';
 import { productService } from '../../services/productService';
 import { categoryService } from '../../services/categoryService';
-import { PRODUCT_STATUS_STYLES } from '../../utils/contant';
+import { Category_value_Map, PRODUCT_STATUS_STYLES } from '../../utils/contant';
 
-export default function ProductCard({ product, onDeleted }: {product : Product, onDeleted: (id: number) => void}) {
+export default function ProductCard(
+  { product, onDeleted }:
+   {product : Product; 
+    onDeleted: (id: number) => void; 
+    }
+  ) {
   const router = useRouter();
   const [showModal, setShowModal] = useState(false);
-const [productIdToDelete, setProductIdToDelete] = useState<number | null>(null);
-  const [categoryName, setCategoryName] = useState<string>('');
+  const [productIdToDelete, setProductIdToDelete] = useState<number | null>(null);
+ 
 
-  useEffect(() => {
-    const loadCategory = async () => {
-      const categories = await categoryService.getAllCategories();
-      const matchedCategory = categories.find((c) => Number(c.id) === product.categoryId);
-      setCategoryName(matchedCategory ? matchedCategory.name : '');
-    };
-    loadCategory();
-  }, [product.categoryId]);
+const categoryName = Category_value_Map[product.categoryId]
+
 
   const handleEdit = (): void => {
     router.push(`/edit/${product.id}`);

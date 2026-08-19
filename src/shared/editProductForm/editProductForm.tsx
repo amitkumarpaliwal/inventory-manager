@@ -3,7 +3,7 @@
 import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react';
 import { productService } from '../../services/productService';
 import type { Product, ProductFormErrors, ProductFormValues } from '../../types/product';
-import { CATEGORY_ID_MAP, Category_value_Map, normalizeCategory, PRODUCT_STATUS_OPTIONS } from '../../utils/contant';
+import { CATEGORY_ID_MAP, Category_value_Map, PRODUCT_STATUS_OPTIONS } from '../../utils/contant';
 import styles from './editProductForm.module.css'
 import { useRouter } from 'next/navigation';
 import { categoryService } from '@/services/categoryService';
