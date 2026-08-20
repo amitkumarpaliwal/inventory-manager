@@ -64,7 +64,7 @@ const categoryName = Category_value_Map[product.categoryId]
 
         <p className={styles.description}>{product.description}</p>
 
-        <div className={styles.price}>{product.price}</div>
+        <div className={styles.price}>INR {product.price}</div>
       </div>
 
       <div className={styles.actions}>
