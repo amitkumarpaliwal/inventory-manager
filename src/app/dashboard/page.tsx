@@ -9,7 +9,7 @@ interface Product {
   sku: string;
   quantity: number;
   minStock: number;
-  category?: string;
+  categoryId?: string;
 }
 
 export default async function Dashboard() {
@@ -47,7 +47,7 @@ export default async function Dashboard() {
   const totalCategories =
     new Set(
       products.map(
-        (product) => product.category
+        (product) => product.categoryId
       )
     ).size;
 

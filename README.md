@@ -334,19 +334,8 @@ npm run start
 
 ---
 
-## Author
+## Author/Contributor
 
 Amit Kumar Paliwal
 
 Prajwal Gowda Magnur Maheshwarappa
-
-Inventory Manager Capstone Project
-
-Built with:
-
-- Next.js 15 App Router
-- Auth.js
-- JSON Server
-- bcryptjs
-- Tailwind CSS
-- TypeScript
