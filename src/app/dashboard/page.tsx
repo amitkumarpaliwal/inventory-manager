@@ -1,12 +1,7 @@
 import Link from 'next/link';
-import {
-  getSession,
-  signOut,
-  useSession,
-} from 'next-auth/react';
-import fs from 'fs';
-import path from 'path';
-import Header from '@/shared/header';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+import { redirect } from 'next/navigation';
 
 interface Product {
   id: number;
@@ -17,52 +12,49 @@ interface Product {
   category?: string;
 }
 
-interface DashboardProps {
-  products: Product[];
-}
-
-export default function Dashboard({
-  products,
-}: DashboardProps) {
-  const { data: session } = useSession();
-
-  const lowInventoryProducts = products.filter(
-    (p) => p.quantity <= p.minStock
+export default async function Dashboard() {
+  const session = await getServerSession(
+    authOptions
   );
+
+  if (!session) {
+    redirect('/login');
+  }
+
+  const response = await fetch(
+    'http://localhost:3001/products',
+    {
+      cache: 'no-store',
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error(
+      'Failed to load products'
+    );
+  }
+
+  const products: Product[] =
+    await response.json();
+
+  const lowInventoryProducts =
+    products.filter(
+      (product) =>
+        product.quantity <=
+        product.minStock
+    );
+
+  const totalCategories =
+    new Set(
+      products.map(
+        (product) => product.category
+      )
+    ).size;
 
   return (
     <div className="min-h-screen bg-slate-100">
-      {/* Header */}
-      {/* <div className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-8 py-5 flex justify-between items-center">
-          <div>
-            <h1 className="text-3xl font-bold text-slate-800">
-              Inventory Manager
-            </h1>
-
-            <p className="text-gray-500 mt-1">
-              Welcome {session?.user?.name}
-            </p>
-          </div>
-
-          <button
-            onClick={() =>
-              signOut({
-                callbackUrl: '/login',
-              })
-            }
-            className="bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-lg transition cursor-pointer"
-          >
-            Logout
-          </button>
-        </div>
-      </div> */}
-      <Header />
-
       <div className="max-w-7xl mx-auto p-8">
-        {/* Stat Cards */}
         <div className="grid md:grid-cols-4 gap-6 mb-8">
-          {/* Total Products */}
           <div className="bg-white rounded-xl shadow p-6">
             <div className="text-gray-500 text-sm">
               Total Products
@@ -73,7 +65,6 @@ export default function Dashboard({
             </div>
           </div>
 
-          {/* Low Inventory */}
           <div className="bg-white rounded-xl shadow p-6">
             <div className="text-gray-500 text-sm">
               Low Inventory
@@ -84,19 +75,17 @@ export default function Dashboard({
             </div>
           </div>
 
-          {/* Categories */}
           <div className="bg-white rounded-xl shadow p-6">
             <div className="text-gray-500 text-sm">
               Categories
             </div>
 
             <div className="text-3xl font-bold text-green-600 mt-2">
-              {new Set(products.map((p) => p.category)).size}
+              {totalCategories}
             </div>
           </div>
 
-          {/* Products Navigation Card */}
-          <Link href="/products">
+           <Link href="/products">
             <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl shadow-lg p-6 h-full hover:shadow-xl hover:scale-105 transition-all duration-200 cursor-pointer">
               <div className="text-sm opacity-90">
                 Product Management
@@ -115,7 +104,6 @@ export default function Dashboard({
           </Link>
         </div>
 
-        {/* Low Stock Grid */}
         <div className="bg-white rounded-xl shadow">
           <div className="px-6 py-4 border-b">
             <h2 className="text-xl font-semibold">
@@ -135,7 +123,9 @@ export default function Dashboard({
                   <th className="p-4">
                     Product
                   </th>
-                  <th className="p-4">SKU</th>
+                  <th className="p-4">
+                    SKU
+                  </th>
                   <th className="p-4">
                     Current Stock
                   </th>
@@ -156,7 +146,8 @@ export default function Dashboard({
                       colSpan={5}
                       className="text-center p-8 text-gray-500"
                     >
-                      No low inventory products.
+                      No low inventory
+                      products.
                     </td>
                   </tr>
                 ) : (
@@ -208,36 +199,4 @@ export default function Dashboard({
       </div>
     </div>
   );
-}
-
-export async function getServerSideProps(
-  context: any
-) {
-  const session =
-    await getSession(context);
-
-  if (!session) {
-    return {
-      redirect: {
-        destination: '/login',
-        permanent: false,
-      },
-    };
-  }
-
-  const filePath = path.join(
-    process.cwd(),
-    'db.json'
-  );
-
-  const fileContent =
-    fs.readFileSync(filePath, 'utf8');
-
-  const db = JSON.parse(fileContent);
-
-  return {
-    props: {
-      products: db.products || [],
-    },
-  };
 }

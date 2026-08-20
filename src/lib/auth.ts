@@ -1,8 +1,8 @@
-import NextAuth from 'next-auth';
+import { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import bcrypt from 'bcryptjs';
 
-export default NextAuth({
+export const authOptions: NextAuthOptions = {
   session: {
     strategy: 'jwt',
   },
@@ -30,19 +30,21 @@ export default NextAuth({
       async authorize(credentials) {
         if (
           !credentials?.username ||
-          !credentials.password
+          !credentials?.password
         ) {
           return null;
         }
 
-        const adminResponse = await fetch(
+        const response = await fetch(
           `${process.env.JSON_SERVER_URL}/admins?username=${encodeURIComponent(
             credentials.username
-          )}`
+          )}`,
+          {
+            cache: 'no-store',
+          }
         );
 
-        const admins =
-          await adminResponse.json();
+        const admins = await response.json();
 
         const admin = admins?.[0];
 
@@ -67,4 +69,23 @@ export default NextAuth({
       },
     }),
   ],
-});
+
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+      }
+
+      return token;
+    },
+
+    async session({ session, token }) {
+      if (session.user) {
+        (session.user as any).id =
+          token.id;
+      }
+
+      return session;
+    },
+  },
+};
