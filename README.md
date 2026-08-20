@@ -337,6 +337,7 @@ npm run start
 ## Author
 
 Amit Kumar Paliwal
+
 Prajwal Gowda Magnur Maheshwarappa
 
 Inventory Manager Capstone Project
