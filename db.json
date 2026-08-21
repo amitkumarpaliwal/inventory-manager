@@ -9,6 +9,18 @@
       "username": "admin1",
       "passwordHash": "$2b$10$XZC8Wc4rH83LhKG5ynILiOc2q17sobUmmFRuPEC02dVZUYcOSHISe",
       "id": "y6r6uo0ZyJM"
+    },
+    {
+      "username": "admin2",
+      "passwordHash": "$2b$10$aIPDvbj7wNCuNPDcVi9L6.IdU.sRyLjZu/STW5TSAD1lVXLMTUOqG",
+      "createdAt": "2026-08-21T09:39:16.193Z",
+      "id": "itBh03SUQ-A"
+    },
+    {
+      "username": "admin4",
+      "passwordHash": "$2b$10$SWLdIYjZgqajy2MOwmw6U.rl19WpjlFxlH.o3uh92UyE8KoCEyc52",
+      "createdAt": "2026-08-21T10:01:20.780Z",
+      "id": "0kHTVHR_n1M"
     }
   ],
   "categories": [
@@ -28,7 +40,7 @@
       "id": "102",
       "sku": "ELE001",
       "name": "Dell laptop1",
-      "description": "Dell Vostro",
+      "description": "Dell Vostro1",
       "price": 60000,
       "categoryId": 1,
       "status": "Active",
@@ -83,6 +95,30 @@
       "minStock": 1,
       "categoryId": 1,
       "id": "8oqZQ8xGCEI"
+    },
+    {
+      "sku": "test2",
+      "name": "test2",
+      "description": "test2 laptop product",
+      "price": 200,
+      "image": "/images/laptop.jpg",
+      "status": "Active",
+      "quantity": 40,
+      "minStock": 15,
+      "categoryId": 2,
+      "id": "nCNDMte42yI"
+    },
+    {
+      "sku": "test3",
+      "name": "test3",
+      "description": "this is desc of test3",
+      "price": 100,
+      "image": "/images/laptop.jpg",
+      "status": "Active",
+      "quantity": 5,
+      "minStock": 2,
+      "categoryId": 2,
+      "id": "BuVhmjhVRyw"
     }
   ],
   "inventory": [
